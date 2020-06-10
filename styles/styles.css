@@ -33,12 +33,21 @@ body {
 header {
     display: flex;
     justify-content: space-between;
-}
-
-header {
-    display: flex;
     align-items: center;
 }
+
+
+.info img {
+    width: 16px;
+    height: 16px;
+    border-radius: 5px;
+}
+
+.info span + span::before {
+    content: '|';
+    margin: 0 5px;
+}
+
 
 header img {
     width: 150px;
