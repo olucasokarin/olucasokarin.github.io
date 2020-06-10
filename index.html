@@ -4,47 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>olucas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500&display=swap" rel="stylesheet">
 
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            outline: 0;
-        }
-
-        body {
-            background: #312E38 ;
-            color: #F4EDE8;
-            font-family: Roboto, Arial, Helvetica, sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            height: 100vh;
-        }
-
-        p {
-            margin-top: 20px;
-        }
-
-       
-    </style>
+    <link href="styles/styles.css" rel="stylesheet">
+    
 </head>
 
 <body>
     <div class=container>
-        <h1>ON THE LINE</h1>
+
+        <header>
+            <div class="info">
+                <h1>Lucas Rodrigues</h1>
+                <span>dev full stack</span>
+                <span>
+                    
+                    <a href="http://linkedin.com/in/olucas014" target="_blank" rel="noopener noreferrer">
+                        linkedin
+                    </a>
+                </span>
+            </div>
+
+            <img src="assets/profile.jpg" alt="profile">
+        </header>
+
+        <div class="title">
+            about
+        </div>
+        <hr>
+        
         <p>
-            this site is the place my portfolios will are online
+            Carreira desenvolvida na área de desenvolvimento de software, mobile e web,
+                utilizando stack javascript, como node e react e react native, juntamente
+                com typescript. E realizando um curso da rocketseat.
         </p>
+        <p>
+            Participação no desenvolvimento de um aplicativo que melhora a participação 
+            e integração da comunidade surda no meio digital através da tradução de português 
+            para signwriting, que é uma linguagem específica para escrita para essas pessoas,
+                podendo também melhorar a comunicação com outras pessoas que não tenham tais dificuldades,
+                aplicativo desenvolvido usando linguagem nativa. 
+                Link de acesso: <a href="https://play.google.com/store/apps/details?id=sw.sign.org.tes" target="blank">
+                    TES - Tradutor de Linguagem Escrita de Sinais
+                </a> 
+        </p>
+
+        <p>
+            Responsável pelo desenvolvimento de uma ferramenta de integração, utilizando como input templates XML, 
+            para realizar cargas em um DB (MySQL) para o site 
+            <a href="https://www.empregosaqui.com.br" target="blank">Empregos Aqui</a>
+            
+        </p>
+    
+        
+        <div class="title">
+            technologies an tools
+        </div>
+        <hr>
+
+        <ul>
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+            <li>React</li>
+            <li>React Native</li>
+            <li>Node</li>
+            <li>RestFull</li>
+            <li>MySQL</li>
+            <li>TypeORM</li>
+            <li>GIT</li>
+            <li>Java EE</li>  
+            <li>Hibernate</li>  
+            <li>Scrum</li>  
+        </ul>
+
+        <div class="title">
+            projects
+        </div>
+        <hr>
+
+        <div class="project_container">
+            <div class="project_content">
+                <span>
+                    Be the Hero
+                </span>
+
+                <p>Plataforma de apoio à ONGs. Onde cada ONG poderia registrar um caso
+                    com descrição e valor. O hero, a pessoa que irá ajudar a causa 
+                    teria acesso via app mobile. Projeto desenvolvido na semana OminiStack </p>
+
+
+                <div class="button_container">
+                    <a href="https://github.com/olucasokarin/be-the-hero" target="blank">
+                        <button >GitHub</button>
+                    </a>
+
+                    <a href="https://www.linkedin.com/pulse/primeiro-contato-com-stack-js-lucas-rodrigues/" target="blank">
+                        <button >Artigo no linkedin</button>
+                    </a>
+
+                </div>
+            </div>
+
+            <img src="assets/bethehero.png" alt="bethehero">
+        </div>
+
+        <div class="project_container">
+            <div class="project_content">
+                <span>
+                    oNotes
+                </span>
+
+                <p>Projeto em desenvolvimento</p>
+                <p>Um site de anotações, sendo desenvolvido em react e o backend 
+                    sendo desenvolvido em node.
+                </p>
+                
+            </div>
+
+            <img src="assets/onotes.png" alt="onotes">
+        </div>
+        
       </div>
+
+
 </body>
 </html>
