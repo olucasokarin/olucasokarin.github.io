@@ -36,8 +36,6 @@ header {
     align-items: center;
 }
 
-
-
 .info span + span::before {
     content: '|';
     margin: 0 5px;
