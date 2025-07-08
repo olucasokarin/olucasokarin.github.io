@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Estoque | Organize seu Espaço</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind: bg-slate-50 */
+            color: #334155; /* Tailwind: text-slate-700 */
+        }
+        .btn-primary {
+            background-color: #6d28d9; /* Tailwind: bg-violet-700 */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem; /* Tailwind: rounded-lg */
+            font-weight: 600; /* Tailwind: font-semibold */
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #7c3aed; /* Tailwind: bg-violet-600 */
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem; /* Tailwind: rounded-2xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Tailwind: shadow-lg */
+        }
+        /* Custom styles for the pricing cards */
+        .pricing-card {
+            background-color: white;
+            border-radius: 1rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+            padding: 1.5rem; /* p-6 */
+            position: relative;
+        }
+        .pricing-card.popular {
+            border: 2px solid #8b5cf6; /* Adjusted to violet-500 */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+        }
+        .badge-popular {
+            background-image: linear-gradient(to right, #8b5cf6, #a78bfa); /* from-violet-500 to-purple-400 */
+            color: white;
+            padding: 0.25rem 1rem; /* px-4 py-1 */
+            border-radius: 9999px; /* rounded-full */
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 500; /* font-medium */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-pricing {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.375rem; /* rounded-md */
+            font-weight: 500; /* font-medium */
+            transition: background-color 0.3s ease;
+            width: 100%;
+            padding: 0.75rem 1.5rem; /* size="lg" equivalent */
+            font-size: 1.125rem; /* text-lg */
+        }
+        .btn-pricing.popular {
+            background-image: linear-gradient(to right, #8b5cf6, #a78bfa); /* from-violet-500 to-purple-400 */
+            color: white;
+        }
+        .btn-pricing.popular:hover {
+            background-image: linear-gradient(to right, #7c3aed, #9333ea); /* hover:from-violet-600 hover:to-purple-600 */
+        }
+        .btn-pricing.default {
+            background-color: #4c1d95; /* bg-violet-800 */
+            color: white;
+        }
+        .btn-pricing.default:hover {
+            background-color: #5b21b6; /* hover:bg-violet-700 */
+        }
+        .feature-icon-check {
+            color: #22c55e; /* text-green-500 */
+            flex-shrink: 0;
+            width: 1.25rem; /* w-5 */
+            height: 1.25rem; /* h-5 */
+        }
+        .feature-icon-x {
+            color: #d1d5db; /* text-gray-300 */
+            flex-shrink: 0;
+            width: 1.25rem; /* w-5 */
+            height: 1.25rem; /* h-5 */
+        }
+        .feature-text-included {
+            color: #374151; /* text-gray-700 */
+            font-size: 0.875rem; /* text-sm */
+        }
+        .feature-text-excluded {
+            color: #9ca3af; /* text-gray-400 */
+            font-size: 0.875rem; /* text-sm */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation Bar -->
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-violet-700">Artisave</a>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#beneficios" class="text-slate-600 hover:text-violet-700 font-medium">Benefícios</a></li>
+                    <li><a href="#como-funciona" class="text-slate-600 hover:text-violet-700 font-medium">Como Funciona</a></li>
+                    <li><a href="#planos" class="text-slate-600 hover:text-violet-700 font-medium">Planos</a></li>
+                    <li><a href="#seja-o-primeiro" class="text-slate-600 hover:text-violet-700 font-medium">Pré-Lançamento</a></li>
+                    <li><a href="#contato" class="text-slate-600 hover:text-violet-700 font-medium">Contato</a></li>
+                </ul>
+            </nav>
+            <button class="md:hidden text-slate-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-violet-600 to-purple-500 text-white py-20 px-4 text-center rounded-b-3xl">
+        <div class="container mx-auto max-w-4xl">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+                Organize seu Negócio, Liberte sua Criatividade!
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                A gestão de estoque descomplicada para empreendedores. Tenha controle total sobre seus produtos, materiais e processos de produção.
+            </p>
+            <a href="#planos" class="btn-primary inline-block text-lg md:text-xl px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+                Comece Agora!
+            </a>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="beneficios" class="py-16 px-4 bg-slate-50">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-slate-800 mb-12">Benefícios para o Empreendedor Moderno</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Benefit 1 -->
+                <div class="card p-8 text-center hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-violet-600 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Controle de Materiais</h3>
+                    <p class="text-slate-600">Nunca mais perca um material! Saiba exatamente o que você tem, onde está e quando precisa reabastecer.</p>
+                </div>
+                <!-- Benefit 2 -->
+                <div class="card p-8 text-center hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-violet-600 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2m0 0V5m0 14v-3m-6 0h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Gestão de Produtos Acabados</h3>
+                    <p class="text-slate-600">Gerencie seus produtos prontos para venda, controle o estoque e acompanhe o desempenho de cada item.</p>
+                </div>
+                <!-- Benefit 3 -->
+                <div class="card p-8 text-center hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-violet-600 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h10m-9 4h8a3 3 0 003-3V8a3 3 0 00-3-3H8a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Relatórios Inteligentes</h3>
+                    <p class="text-slate-600">Acesse relatórios claros sobre vendas, materiais utilizados e lucratividade para tomar decisões estratégicas.</p>
+                </div>
+                <!-- Benefit 4 -->
+                <div class="card p-8 text-center hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-violet-600 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Economia de Tempo</h3>
+                    <p class="text-slate-600">Automatize tarefas repetitivas e tenha mais tempo para se dedicar ao que você ama: focar no seu negócio!</p>
+                </div>
+                <!-- Benefit 5 -->
+                <div class="card p-8 text-center hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-violet-600 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Redução de Desperdício</h3>
+                    <p class="text-slate-600">Evite a compra excessiva de materiais e o desperdício, otimizando seus recursos.</p>
+                </div>
+                <!-- Benefit 6 -->
+                <div class="card p-8 text-center hover:-translate-y-1 transition-all duration-300">
+                    <div class="text-violet-600 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2-3 2 3-.895 3-2-1.343-2-3-2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Foco no Crescimento</h3>
+                    <p class="text-slate-600">Com a organização em dia, você pode se concentrar no que realmente importa: o crescimento do seu negócio!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="como-funciona" class="py-16 px-4 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-slate-800 mb-12">Como Funciona? Simples e Intuitivo!</h2>
+            <div class="grid grid-cols-1 md:grid-cols-5 items-center">
+            <!-- Step 1 -->
+            <div class="text-center">
+                <div class="bg-violet-100 text-violet-700 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-md">1</div>
+                <h3 class="text-2xl font-semibold text-slate-800 mb-3">Cadastre seus Materiais</h3>
+                <p class="text-slate-600">Adicione todos os seus materiais brutos com facilidade, incluindo quantidade, custo e fornecedor.</p>
+            </div>
+
+            <!-- Arrow 1 -->
+            <div class="hidden md:flex justify-center items-center">
+                <svg class="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="text-center">
+                <div class="bg-violet-100 text-violet-700 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-md">2</div>
+                <h3 class="text-2xl font-semibold text-slate-800 mb-3">Crie seus Produtos</h3>
+                <p class="text-slate-600">Defina os produtos acabados, indicando quais materiais são utilizados em cada um. E etapas de cada um.</p>
+            </div>
+
+            <!-- Arrow 2 -->
+            <div class="hidden md:flex justify-center items-center">
+                <svg class="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="text-center">
+                <div class="bg-violet-100 text-violet-700 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 text-3xl font-bold shadow-md">3</div>
+                <h3 class="text-2xl font-semibold text-slate-800 mb-3">Gerencie Vendas e Estoque</h3>
+                <p class="text-slate-600">Ao registrar uma venda, o sistema automaticamente dá baixa nos materiais e produtos, mantendo seu estoque atualizado.</p>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Plans Section - Based on React Card Layout -->
+    <section id="planos" class="py-16 px-4 bg-slate-50">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-slate-800 mb-12">Escolha o Plano Perfeito para o Seu Negócio</h2>
+            <p class="mt-4 text-xl text-gray-600 text-center mb-10">
+                Encontre a opção que se encaixa melhor nas suas necessidades e impulsione o seu negócio.
+            </p>
+
+            <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <!-- Plano Gratuito -->
+                <div class="pricing-card">
+                    <div class="text-center pb-8">
+                        <h3 class="text-2xl font-bold text-gray-900">Gratuito</h3>
+                        <div class="mt-4">
+                            <span class="text-4xl font-bold text-gray-900">R$0</span>
+                            <span class="text-gray-600">/mês</span>
+                        </div>
+                        <p class="text-gray-600 mt-2">Ideal para começar a organizar seu ateliê.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="space-y-3">
+                            <!-- Included Features -->
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">App</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Usuários: 1</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Cadastro de produtos ilimitado</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Controle de estoque</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Histórico de movimentações</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Alerta de estoque mínimo</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Suporte: Básico (email)</span>
+                            </div>
+                            <!-- Excluded Features -->
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Cadastro de clientes</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Backup em nuvem</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Exportação de dados</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Relatórios de vendas e gastos</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Perfis de acesso</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Dashboard gráfico</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Catálogo online</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Controle de múltiplos estoques</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Sincronização real-time</span>
+                            </div>
+                        </div>
+                        <div class="pt-6">
+                            <button class="btn-pricing default">Começar Grátis</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plano Essencial -->
+                <div class="pricing-card">
+                    <div class="text-center pb-8">
+                        <h3 class="text-2xl font-bold text-gray-900">Essencial</h3>
+                        <div class="mt-4">
+                            <span class="text-4xl font-bold text-gray-900">R$14,90</span>
+                            <span class="text-gray-600">/mês</span>
+                        </div>
+                        <p class="text-gray-600 mt-2">Para empreendedores que precisam de mais controle e suporte.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="space-y-3">
+                            <!-- Included Features -->
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">App</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Usuários: 1</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Cadastro de produtos ilimitado</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Controle de estoque</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Histórico de movimentações</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Alerta de estoque mínimo</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Cadastro de clientes</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Backup em nuvem</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Sincronização real-time</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Suporte: WhatsApp</span>
+                            </div>
+                            <!-- Excluded Features -->
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Exportação de dados</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Relatórios de vendas e gastos</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Perfis de acesso</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Dashboard gráfico</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Catálogo online</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Controle de múltiplos estoques</span>
+                            </div>
+                        </div>
+                        <div class="pt-6">
+                            <button class="btn-pricing default">Escolher Plano</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plano Profissional (Mais Popular) -->
+                <div class="pricing-card popular">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <span class="badge-popular">Melhor Plano</span>
+                    </div>
+                    <div class="text-center pb-8">
+                        <h3 class="text-2xl font-bold text-gray-900">Profissional</h3>
+                        <div class="mt-4">
+                            <span class="text-4xl font-bold text-gray-900">R$29,90</span>
+                            <span class="text-gray-600">/mês</span>
+                        </div>
+                        <p class="text-gray-600 mt-2">Para ateliês em crescimento com equipe e demanda.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="space-y-3">
+                            <!-- Included Features -->
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">App</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Usuários: 2 (Dono/Vendedor)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Cadastro de produtos ilimitado</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Controle de estoque</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Histórico de movimentações</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Alerta de estoque mínimo</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Cadastro de clientes</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Backup em nuvem</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Exportação de dados: (CSV)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Relatórios de vendas e gastos: (texto/tabela)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Perfis de acesso: Dono / Vendedor</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Catálogo online: (limitado a 10 itens)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Sincronização real-time</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Suporte: WhatsApp Prioritário</span>
+                            </div>
+                            <!-- Excluded Features -->
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Dashboard gráfico</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span class="feature-text-excluded">Controle de múltiplos estoques</span>
+                            </div>
+                        </div>
+                        <div class="pt-6">
+                            <button class="btn-pricing default">Escolher Plano</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plano Pro Web -->
+                <div class="pricing-card">
+                    <div class="text-center pb-8">
+                        <h3 class="text-2xl font-bold text-gray-900">Pro Web</h3>
+                        <div class="mt-4">
+                            <span class="text-4xl font-bold text-gray-900">R$59,90</span>
+                            <span class="text-gray-600">/mês</span>
+                        </div>
+                        <p class="text-gray-600 mt-2">Solução completa para grandes ateliês e vendas online.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="space-y-3">
+                            <!-- Included Features (All for Pro Web) -->
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">App + Web</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Usuários: Até 5 (com permissões)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Cadastro de produtos ilimitado</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Controle de estoque</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Histórico de movimentações</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Alerta de estoque mínimo</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Cadastro de clientes</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Backup em nuvem: Diário + exportação</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Exportação de dados: (CSV, Excel, PDF)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Relatórios de vendas e gastos: (gráficos + filtros)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Perfis de acesso: Dono / Vendedor / Outros</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Dashboard gráfico</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Catálogo online: (link público)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Controle de múltiplos estoques</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Sincronização real-time: (com refinamento)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="feature-text-included">Suporte: Dedicado + setup</span>
+                            </div>
+                        </div>
+                        <div class="pt-6">
+                            <button class="btn-pricing default">Escolher Plano</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Pré-Lançamento / Seja o Primeiro! -->
+    <section id="seja-o-primeiro" class="bg-violet-600 text-white py-20 px-4 text-center rounded-3xl my-16">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Seja um dos Pioneiros a Experimentar!</h2>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                Nosso aplicativo está quase pronto para revolucionar a gestão do seu negócio. Clique no botão abaixo para ter acesso exclusivo assim que lançarmos, e nos ajude a construir as funcionalidades que você mais precisa!
+            </p>
+            <!-- Botão que abre o formulário em nova aba -->
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScKxavgClp6hGHmDxzZU0_bWIJP2KT7bNALbYGQ_HqLyTXw4A/viewform?usp=sf_link" target="_blank" class="btn-primary inline-block bg-white text-violet-700 hover:bg-violet-100 text-lg md:text-xl px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+                Quero Ser Pioneiro!
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato" class="bg-slate-800 text-white py-10 px-4">
+        <div class="container mx-auto text-center">
+            <p class="mb-4">&copy; 2025 Artisave. Todos os direitos reservados.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-slate-400 hover:text-white">Termos de Serviço</a>
+                <a href="#" class="text-slate-400 hover:text-white">Política de Privacidade</a>
+                <a href="#" class="text-slate-400 hover:text-white">Contato</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
