@@ -37,6 +37,9 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
             padding: 1.5rem; /* p-6 */
             position: relative;
+            display: flex; /* Adicionado para flexbox */
+            flex-direction: column; /* Conteúdo em coluna */
+            /* justify-content: space-between; Removido para evitar o espaço indesejado */
         }
         .pricing-card.popular {
             border: 2px solid #8b5cf6; /* Adjusted to violet-500 */
@@ -63,6 +66,7 @@
             width: 100%;
             padding: 0.75rem 1.5rem; /* size="lg" equivalent */
             font-size: 1.125rem; /* text-lg */
+            /* margin-top: auto; Removido, pois a nova estrutura lida com isso */
         }
         .btn-pricing.popular {
             background-image: linear-gradient(to right, #8b5cf6, #a78bfa); /* from-violet-500 to-purple-400 */
@@ -181,7 +185,7 @@
                     <p class="text-slate-600">Evite a compra excessiva de materiais e o desperdício, otimizando seus recursos.</p>
                 </div>
                 <!-- Benefit 6 -->
-                <div class="card p-8 text-center hover:-translate-y-1 transition-all duration-300">
+                <div class="card p-8 text-center">
                     <div class="text-violet-600 mb-4">
                         <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2-3 2 3-.895 3-2-1.343-2-3-2z"></path></svg>
                     </div>
@@ -242,171 +246,175 @@
             <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
                 <!-- Plano Gratuito -->
                 <div class="pricing-card">
-                    <div class="text-center pb-8">
-                        <h3 class="text-2xl font-bold text-gray-900">Gratuito</h3>
-                        <div class="mt-4">
-                            <span class="text-4xl font-bold text-gray-900">R$0</span>
-                            <span class="text-gray-600">/mês</span>
+                    <div class="flex flex-col flex-grow"> <!-- Novo wrapper para o conteúdo superior -->
+                        <div class="text-center pb-8">
+                            <h3 class="text-2xl font-bold text-gray-900">Gratuito</h3>
+                            <div class="mt-4">
+                                <span class="text-4xl font-bold text-gray-900">R$0</span>
+                                <span class="text-gray-600">/mês</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">Ideal para começar a organizar seu ateliê.</p>
                         </div>
-                        <p class="text-gray-600 mt-2">Ideal para começar a organizar seu ateliê.</p>
+                        <div class="space-y-4">
+                            <div class="space-y-3">
+                                <!-- Included Features -->
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">App</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Usuários: 1</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Cadastro de produtos ilimitado</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Controle de estoque</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Histórico de movimentações</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Alerta de estoque mínimo</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Suporte: Básico (email)</span>
+                                </div>
+                                <!-- Excluded Features -->
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Cadastro de clientes</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Backup em nuvem</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Exportação de dados</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Relatórios de vendas e gastos</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Perfis de acesso</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Dashboard gráfico</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Catálogo online</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Controle de múltiplos estoques</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Sincronização real-time</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="space-y-4">
-                        <div class="space-y-3">
-                            <!-- Included Features -->
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">App</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Usuários: 1</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Cadastro de produtos ilimitado</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Controle de estoque</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Histórico de movimentações</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Alerta de estoque mínimo</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Suporte: Básico (email)</span>
-                            </div>
-                            <!-- Excluded Features -->
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Cadastro de clientes</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Backup em nuvem</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Exportação de dados</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Relatórios de vendas e gastos</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Perfis de acesso</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Dashboard gráfico</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Catálogo online</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Controle de múltiplos estoques</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Sincronização real-time</span>
-                            </div>
-                        </div>
-                        <div class="pt-6">
-                            <button class="btn-pricing default">Começar Grátis</button>
-                        </div>
+                    <div class="pt-6">
+                        <button class="btn-pricing default">Começar Grátis</button>
                     </div>
                 </div>
 
                 <!-- Plano Essencial -->
                 <div class="pricing-card">
-                    <div class="text-center pb-8">
-                        <h3 class="text-2xl font-bold text-gray-900">Essencial</h3>
-                        <div class="mt-4">
-                            <span class="text-4xl font-bold text-gray-900">R$14,90</span>
-                            <span class="text-gray-600">/mês</span>
+                    <div class="flex flex-col flex-grow"> <!-- Novo wrapper para o conteúdo superior -->
+                        <div class="text-center pb-8">
+                            <h3 class="text-2xl font-bold text-gray-900">Essencial</h3>
+                            <div class="mt-4">
+                                <span class="text-4xl font-bold text-gray-900">R$14,90</span>
+                                <span class="text-gray-600">/mês</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">Para empreendedores que precisam de mais controle e suporte.</p>
                         </div>
-                        <p class="text-gray-600 mt-2">Para empreendedores que precisam de mais controle e suporte.</p>
+                        <div class="space-y-4">
+                            <div class="space-y-3">
+                                <!-- Included Features -->
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">App</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Usuários: 1</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Cadastro de produtos ilimitado</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Controle de estoque</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Histórico de movimentações</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Alerta de estoque mínimo</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Cadastro de clientes</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Backup em nuvem</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Sincronização real-time</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Suporte: WhatsApp</span>
+                                </div>
+                                <!-- Excluded Features -->
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Exportação de dados</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Relatórios de vendas e gastos</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Perfis de acesso</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Dashboard gráfico</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Catálogo online</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Controle de múltiplos estoques</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="space-y-4">
-                        <div class="space-y-3">
-                            <!-- Included Features -->
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">App</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Usuários: 1</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Cadastro de produtos ilimitado</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Controle de estoque</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Histórico de movimentações</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Alerta de estoque mínimo</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Cadastro de clientes</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Backup em nuvem</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Sincronização real-time</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Suporte: WhatsApp</span>
-                            </div>
-                            <!-- Excluded Features -->
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Exportação de dados</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Relatórios de vendas e gastos</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Perfis de acesso</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Dashboard gráfico</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Catálogo online</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Controle de múltiplos estoques</span>
-                            </div>
-                        </div>
-                        <div class="pt-6">
-                            <button class="btn-pricing default">Escolher Plano</button>
-                        </div>
+                    <div class="pt-6">
+                        <button class="btn-pricing default">Escolher Plano</button>
                     </div>
                 </div>
 
@@ -415,170 +423,174 @@
                     <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
                         <span class="badge-popular">Melhor Plano</span>
                     </div>
-                    <div class="text-center pb-8">
-                        <h3 class="text-2xl font-bold text-gray-900">Profissional</h3>
-                        <div class="mt-4">
-                            <span class="text-4xl font-bold text-gray-900">R$29,90</span>
-                            <span class="text-gray-600">/mês</span>
+                    <div class="flex flex-col flex-grow"> <!-- Novo wrapper para o conteúdo superior -->
+                        <div class="text-center pb-8">
+                            <h3 class="text-2xl font-bold text-gray-900">Profissional</h3>
+                            <div class="mt-4">
+                                <span class="text-4xl font-bold text-gray-900">R$29,90</span>
+                                <span class="text-gray-600">/mês</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">Para ateliês em crescimento com equipe e demanda.</p>
                         </div>
-                        <p class="text-gray-600 mt-2">Para ateliês em crescimento com equipe e demanda.</p>
+                        <div class="space-y-4">
+                            <div class="space-y-3">
+                                <!-- Included Features -->
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">App</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Usuários: 2 (Dono/Vendedor)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Cadastro de produtos ilimitado</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Controle de estoque</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Histórico de movimentações</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Alerta de estoque mínimo</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Cadastro de clientes</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Backup em nuvem</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Exportação de dados: (CSV)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Relatórios de vendas e gastos: (texto/tabela)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Perfis de acesso: Dono / Vendedor</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Catálogo online: (limitado a 10 itens)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Sincronização real-time</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Suporte: WhatsApp Prioritário</span>
+                                </div>
+                                <!-- Excluded Features -->
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Dashboard gráfico</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <span class="feature-text-excluded">Controle de múltiplos estoques</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="space-y-4">
-                        <div class="space-y-3">
-                            <!-- Included Features -->
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">App</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Usuários: 2 (Dono/Vendedor)</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Cadastro de produtos ilimitado</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Controle de estoque</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Histórico de movimentações</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Alerta de estoque mínimo</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Cadastro de clientes</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Backup em nuvem</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Exportação de dados: (CSV)</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Relatórios de vendas e gastos: (texto/tabela)</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Perfis de acesso: Dono / Vendedor</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Catálogo online: (limitado a 10 itens)</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Sincronização real-time</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Suporte: WhatsApp Prioritário</span>
-                            </div>
-                            <!-- Excluded Features -->
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Dashboard gráfico</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="feature-text-excluded">Controle de múltiplos estoques</span>
-                            </div>
-                        </div>
-                        <div class="pt-6">
-                            <button class="btn-pricing default">Escolher Plano</button>
-                        </div>
+                    <div class="pt-6">
+                        <button class="btn-pricing popular">Escolher Plano</button>
                     </div>
                 </div>
 
                 <!-- Plano Pro Web -->
                 <div class="pricing-card">
-                    <div class="text-center pb-8">
-                        <h3 class="text-2xl font-bold text-gray-900">Pro Web</h3>
-                        <div class="mt-4">
-                            <span class="text-4xl font-bold text-gray-900">R$59,90</span>
-                            <span class="text-gray-600">/mês</span>
+                    <div class="flex flex-col flex-grow"> <!-- Novo wrapper para o conteúdo superior -->
+                        <div class="text-center pb-8">
+                            <h3 class="text-2xl font-bold text-gray-900">Pro Web</h3>
+                            <div class="mt-4">
+                                <span class="text-4xl font-bold text-gray-900">R$59,90</span>
+                                <span class="text-gray-600">/mês</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">Solução completa para grandes ateliês e vendas online.</p>
                         </div>
-                        <p class="text-gray-600 mt-2">Solução completa para grandes ateliês e vendas online.</p>
+                        <div class="space-y-4">
+                            <div class="space-y-3">
+                                <!-- Included Features (All for Pro Web) -->
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">App + Web</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Usuários: Até 5 (com permissões)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Cadastro de produtos ilimitado</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Controle de estoque</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Histórico de movimentações</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Alerta de estoque mínimo</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Cadastro de clientes</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Backup em nuvem: Diário + exportação</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Exportação de dados: (CSV, Excel, PDF)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Relatórios de vendas e gastos: (gráficos + filtros)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Perfis de acesso: Dono / Vendedor / Outros</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Dashboard gráfico</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Catálogo online: (link público)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Controle de múltiplos estoques</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Sincronização real-time: (com refinamento)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="feature-text-included">Suporte: Dedicado + setup</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="space-y-4">
-                        <div class="space-y-3">
-                            <!-- Included Features (All for Pro Web) -->
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">App + Web</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Usuários: Até 5 (com permissões)</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Cadastro de produtos ilimitado</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Controle de estoque</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Histórico de movimentações</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Alerta de estoque mínimo</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Cadastro de clientes</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Backup em nuvem: Diário + exportação</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Exportação de dados: (CSV, Excel, PDF)</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Relatórios de vendas e gastos: (gráficos + filtros)</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Perfis de acesso: Dono / Vendedor / Outros</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Dashboard gráfico</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Catálogo online: (link público)</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Controle de múltiplos estoques</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Sincronização real-time: (com refinamento)</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <svg class="feature-icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="feature-text-included">Suporte: Dedicado + setup</span>
-                            </div>
-                        </div>
-                        <div class="pt-6">
-                            <button class="btn-pricing default">Escolher Plano</button>
-                        </div>
+                    <div class="pt-6">
+                        <button class="btn-pricing default">Escolher Plano</button>
                     </div>
                 </div>
             </div>
